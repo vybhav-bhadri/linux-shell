@@ -151,6 +151,99 @@ The `awk` command is a text processing tool used to manipulate and analyze text.
 ps -ef | awk '{print $2, $3}'
 ```
 
+### `curl`
+The `curl` command is used to transfer data from or to a server using supported protocols such as HTTP, HTTPS, FTP, etc. It is commonly used to interact with APIs, download files, and test server endpoints.
+
+#### Example:
+```bash
+# Fetch a web page:
+curl http://example.com
+
+# Send a POST request with JSON data:
+curl -X POST -H "Content-Type: application/json" -d '{"key":"value"}' http://example.com/api
+```
+
+### `wget`
+The `wget` command is used to download files from the internet. It supports HTTP, HTTPS, and FTP protocols. Unlike `curl`, `wget` is designed primarily for non-interactive downloading of files.
+
+#### Example:
+```bash
+# Download a file:
+wget http://example.com/file.zip
+
+# Download recursively from a website:
+wget -r http://example.com
+```
+
+#### Key Differences:
+- Use `curl` for interacting with APIs, sending HTTP requests, or testing endpoints.
+- Use `wget` for downloading files, especially in batch or recursive downloads.
+
+### `sudo su -`
+The `sudo su -` command allows you to switch to the root user with the root environment loaded. This is useful when you need elevated privileges to perform system-level tasks.
+
+#### Example:
+```bash
+# Switch to root user:
+sudo su -
+
+# Exit root user:
+exit
+```
+
+### `find`
+The `find` command is used to search for files and directories in a directory hierarchy based on various criteria like name, size, type, etc.
+
+#### Example:
+```bash
+# Find files by name:
+find /path/to/search -name "filename"
+
+# Find files modified in the last 7 days:
+find /path/to/search -mtime -7
+
+# Execute a command on found files:
+find /path/to/search -name "*.log" -exec rm {} \;
+```
+
+### If-Else and For Loop in Shell Scripting
+
+#### If-Else Example:
+```bash
+#!/bin/bash
+
+# Check if a file exists
+if [ -f "/path/to/file" ]; then
+  echo "File exists."
+else
+  echo "File does not exist."
+fi
+```
+
+#### For Loop Example:
+```bash
+#!/bin/bash
+
+# Loop through a list of items
+for item in 1 2 3 4 5; do
+  echo "Item: $item"
+done
+```
+
+#### Combined Example:
+```bash
+#!/bin/bash
+
+# Check and list files in a directory
+if [ -d "/path/to/directory" ]; then
+  for file in /path/to/directory/*; do
+    echo "Found file: $file"
+  done
+else
+  echo "Directory does not exist."
+fi
+```
+
 ---
 
 This article provides an overview of essential shell scripting commands and techniques for cloud and DevOps professionals. Understanding and using these scripts effectively can help in automating tasks, monitoring resources, and ensuring system stability.
