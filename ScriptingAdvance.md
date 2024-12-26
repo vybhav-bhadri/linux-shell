@@ -10,6 +10,10 @@ Save the following script in a file named `node_health.sh` and give it execute p
 ```bash
 #!/bin/bash
 
+# Enable error handling and pipefail
+set -e
+set -o pipefail
+
 # Node Health Script
 
 # Display Disk Usage
@@ -66,6 +70,37 @@ The script outputs a comprehensive overview of the node's health, including disk
 
 ## 2. Explanation of Shell Features and Commands
 
+### `set -e`
+The `set -e` command instructs the shell to exit immediately if any command within the script returns a non-zero status. This ensures that the script does not proceed with unexpected errors and helps in catching issues early.
+
+#### When to Use:
+Use `set -e` in scripts where errors should terminate the execution, such as deployment scripts or health checks.
+
+#### Example:
+```bash
+#!/bin/bash
+set -e
+# Any error in the following commands will cause the script to exit
+mkdir /tmp/mydir
+cd /tmp/mydir
+rm -rf /tmp/nonexistentfile  # This will terminate the script
+```
+
+### `set -o pipefail`
+The `set -o pipefail` option ensures that the return value of a pipeline is the exit status of the last command to return a non-zero status, rather than just the last command in the pipeline. This is critical when chaining commands with pipes.
+
+#### When to Use:
+Use `set -o pipefail` when relying on pipelines and you want to catch failures in any part of the chain.
+
+#### Example:
+```bash
+#!/bin/bash
+set -o pipefail
+# This command will fail if any part of the pipeline fails
+ls /nonexistent | grep "file"
+```
+Without `set -o pipefail`, the script would continue, as only the exit status of `grep` would be checked.
+
 ### `set -x`
 The `set -x` command is used for debugging shell scripts. When enabled, it prints each command and its arguments to the terminal before executing it, allowing you to trace script execution step-by-step. Use it to identify issues in scripts.
 
@@ -119,4 +154,3 @@ ps -ef | awk '{print $2, $3}'
 ---
 
 This article provides an overview of essential shell scripting commands and techniques for cloud and DevOps professionals. Understanding and using these scripts effectively can help in automating tasks, monitoring resources, and ensuring system stability.
-
